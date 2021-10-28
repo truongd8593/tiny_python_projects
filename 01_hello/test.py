@@ -26,7 +26,7 @@ def test_runnable():
 def test_executable():
     """Says 'Hello, World!' by default"""
 
-    out = getoutput(prg)
+    out = getoutput(f'python {prg}')
     assert out.strip() == 'Hello, World!'
 
 
@@ -35,7 +35,7 @@ def test_usage():
     """usage"""
 
     for flag in ['-h', '--help']:
-        rv, out = getstatusoutput(f'{prg} {flag}')
+        rv, out = getstatusoutput(f'python {prg} {flag}')
         assert rv == 0
         assert out.lower().startswith('usage')
 
@@ -46,6 +46,6 @@ def test_input():
 
     for val in ['Universe', 'Multiverse']:
         for option in ['-n', '--name']:
-            rv, out = getstatusoutput(f'{prg} {option} {val}')
+            rv, out = getstatusoutput(f'python {prg} {option} {val}')
             assert rv == 0
             assert out.strip() == f'Hello, {val}!'
